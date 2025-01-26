@@ -6,6 +6,7 @@ import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.pedropathing.pathgen.BezierLine;
 import com.pedropathing.pathgen.PathChain;
 import com.pedropathing.pathgen.Point;
+import com.pedropathing.util.Drawing;
 import com.qualcomm.hardware.dfrobot.HuskyLens;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -119,6 +120,7 @@ public class PP_Auto_RedBasket1 extends OpMode {
                 .addPath(new BezierLine(new Point(startPose), new Point(preRedScorePose)))
                 .setLinearHeadingInterpolation(startPose.getHeading(), preRedScorePose.getHeading())
                 .build();
+
         preLoadScore = follower.pathBuilder()
                 .addPath(new BezierLine(new Point(preRedScorePose), new Point(redScorePose)))
                 .setLinearHeadingInterpolation(preRedScorePose.getHeading(), redScorePose.getHeading())
@@ -163,20 +165,21 @@ public class PP_Auto_RedBasket1 extends OpMode {
 //                    autoRobot.Outtake.highBasket();
 //                }
                 autoDebug(500, "Auto:0", "raise outtake-high basket");
-                follower.followPath(preLoadScoreStop, false);
-                follower.setMaxPower(0.3);
+                follower.followPath(preLoadScoreStop, true);
+                follower.setMaxPower(0.2);
                 setPathState(1);
                 break;
-            case 1:     //goto specimen 3 and pick it up
-//                /* This case checks the robot's position and will wait until the robot position is close (1 inch away) from the scorePose's position */
-                if (pathTimer.getElapsedTimeSeconds() > 2.5) {
-                    autoDebug(500, "Auto:1; after 2.5sec", "Go to basket");
-                    follower.followPath(preLoadScore, true);
-                    follower.setMaxPower(0.3);
-                    setPathState(2);
-
-                }
-                break;
+//            case 1:     //goto specimen 3 and pick it up
+////                /* This case checks the robot's position and will wait until the robot position is close (1 inch away) from the scorePose's position */
+//                if (pathTimer.getElapsedTimeSeconds() > 2.5) {
+//                //if(!follower.isBusy()) {
+//                    autoDebug(500, "Auto:1; after 2.5sec", "Go to basket");
+//                    follower.followPath(preLoadScore, true);
+//                    follower.setMaxPower(0.2);
+//                    setPathState(2);
+//
+//                }
+//                break;
 //            case 2:     //goto specimen 3 and pick it up
 ////                /* This case checks the robot's position and will wait until the robot position is close (1 inch away) from the scorePose's position */
 //                if (follower.getPose().getX() > (redScorePose.getX() - 1) && follower.getPose().getY() > (redScorePose.getY() - 1)) {
@@ -302,9 +305,14 @@ public class PP_Auto_RedBasket1 extends OpMode {
         //telemetry.update();
 
 
-        //poseUpdater.update();
-        //dashboardPoseTracker.update();
+        poseUpdater.update();
+        dashboardPoseTracker.update();
         telemetryA.update();
+
+        Drawing.drawPoseHistory(dashboardPoseTracker, "#4CAF50");
+        Drawing.drawRobot(poseUpdater.getPose(), "#4CAF50");
+        Drawing.sendPacket();
+
     }
 
 

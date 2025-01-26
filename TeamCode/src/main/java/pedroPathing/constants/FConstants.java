@@ -23,11 +23,11 @@ public class FConstants {
 
         FollowerConstants.mass = 12.2;              //V2 weight
 
-        FollowerConstants.xMovement = 60;      /** default=57.8741  V1=60 need to run section 4.1 ForwardVelocityTuner at full battery */
-        FollowerConstants.yMovement = 46;       /** default=52.295  V1=46 need to run section 4.2 Strafe VelocityTuner */
+        FollowerConstants.xMovement = 58;      /** default=57.8741  V1=60 need to run section 4.1 ForwardVelocityTuner at full battery */
+        FollowerConstants.yMovement = 42;       /** default=52.295  V1=46 need to run section 4.2 Strafe VelocityTuner */
 
         FollowerConstants.forwardZeroPowerAcceleration = -37;   /** default=-41.278  V1=-37 need to run section 5.1 forwardZeroPowerAccelerationTuner */
-        FollowerConstants.lateralZeroPowerAcceleration = -65;  /** default=-59.7819  V1=-65 need to run section 5.2 lateralZeroPowerAccelerationTuner */
+        FollowerConstants.lateralZeroPowerAcceleration = -75;  /** default=-59.7819  V1=-65 need to run section 5.2 lateralZeroPowerAccelerationTuner */
 
         FollowerConstants.translationalPIDFCoefficients.setCoefficients(0.41,0,0.050,0);      /**  default: CustomPIDFCoefficients(0.1,0,0.01,0); //V1=0.41,0,0.050,0;  */
         FollowerConstants.useSecondaryTranslationalPID = false;
